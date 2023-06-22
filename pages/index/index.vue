@@ -23,17 +23,25 @@
 			return {
 				navIndex: 0,
 				navArr: [],
-				newsArr: []
+				newsArr: [],
+				currentPage: 1
 			}
 		},
 		onLoad() {
 			this.getNavData()
 			this.getNewsData()
 		},
+		onReachBottom() {
+			this.currentPage++;
+			this.getNewsData()
+		},
 		methods: {
 			//点击导航切换
 			clickNav(index, id) {
 				this.navIndex = index
+				//修复切换导航时页面问题
+				this.currentPage = 1
+				this.newsArr = []
 				this.getNewsData(id)
 			},
 			//跳转到详情页
@@ -56,10 +64,11 @@
 				uni.request({
 					url: "https://ku.qingnian8.com/dataApi/news/newslist.php",
 					data: {
-						cid: id
+						cid: id,
+						page: this.currentPage
 					},
 					success: res => {
-						this.newsArr = res.data
+						this.newsArr = [...this.newsArr, ...res.data]
 					}
 				})
 			}
