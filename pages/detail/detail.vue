@@ -42,8 +42,35 @@
 						uni.setNavigationBarTitle({
 							title: this.detail.title
 						})
+						this.saveHistory()
 					}
 				})
+			},
+			//存储个人浏览记录
+			saveHistory() {
+				let {
+					id,
+					classid,
+					picurl,
+					title
+				} = this.detail
+				let historyArr = uni.getStorageSync("historyArr") || []
+				let item = {
+					id,
+					classid,
+					picurl,
+					title,
+					looktime: parseTime(Date.now())
+
+				}
+				let index = historyArr.findIndex(i => {
+					return i.id === item.id
+				})
+				if (index === -1) {
+					historyArr.unshift(item)
+					historyArr = historyArr.slice(0, 10)
+					uni.setStorageSync("historyArr", historyArr)
+				}
 			}
 		}
 	}
