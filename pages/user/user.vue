@@ -6,7 +6,7 @@
 		</view>
 		<view class="content">
 			<view class="row">
-				<newsbox></newsbox>
+				<newsbox @click.native="goDetail"></newsbox>
 			</view>
 		</view>
 	</view>
@@ -18,6 +18,14 @@
 			return {
 
 			};
+		},
+		methods: {
+			//跳转到详情页
+			goDetail() {
+				uni.navigateTo({
+					url: "/pages/detail/detail"
+				})
+			}
 		}
 	}
 </script>

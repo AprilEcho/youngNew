@@ -12,6 +12,13 @@
 				"enablePullDownRefresh": false
 			}
 
+		}, {
+			"path": "pages/detail/detail",
+			"style": {
+				"navigationBarTitleText": "新闻详情",
+				"enablePullDownRefresh": false
+			}
+
 		}
 	],
 	"globalStyle": {
@@ -24,13 +31,12 @@
 	"tabBar": {
 		"color": "#666",
 		"selectedColor": "#31c27c",
-		"list": [
-			{
+		"list": [{
 				"text": "首页",
-				 "pagePath": "pages/index/index",
-				 "iconPath": "static/images/home.png",
-				 "selectedIconPath": "static/images/home-h.png"
-				 
+				"pagePath": "pages/index/index",
+				"iconPath": "static/images/home.png",
+				"selectedIconPath": "static/images/home-h.png"
+
 			},
 			{
 				"text": "个人",
