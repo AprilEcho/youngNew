@@ -8,7 +8,7 @@
 		</scroll-view>
 		<view class="content">
 			<view class="row" v-for="item in newsArr" :key="item.id">
-				<newsbox :item="item" @click.native="goDetail"></newsbox>
+				<newsbox :item="item" @click.native="goDetail(item)"></newsbox>
 			</view>
 		</view>
 		<view class="nodata" v-if="!newsArr.length">
@@ -56,9 +56,9 @@
 				this.getNewsData(id)
 			},
 			//跳转到详情页
-			goDetail() {
+			goDetail(item) {
 				uni.navigateTo({
-					url: "/pages/detail/detail"
+					url: `/pages/detail/detail?cid=${item.classid}&id=${item.id}`
 				})
 			},
 			//获取导航列表数据
