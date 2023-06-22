@@ -1,7 +1,7 @@
 <template>
 	<view class="newsbox">
 		<view class="pic">
-			<image :src="item.picUrl" mode="aspectFill"></image>
+			<image :src="item.picurl" mode="aspectFill"></image>
 		</view>
 		<view class="text">
 			<view class="title">{{item.title}}</view>
@@ -27,7 +27,7 @@
 						title: '组件内默认的标题',
 						author: 'zhangsan',
 						hits: 668,
-						picUrl: '../../static/images/nopic.jpg'
+						picurl: '../../static/images/nopic.jpg'
 					}
 				}
 			}
