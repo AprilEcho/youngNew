@@ -1,15 +1,11 @@
 <template>
 	<view class="home">
 		<scroll-view class="navscroll" scroll-x>
-			<view class="item">国内</view>
-			<view class="item">国内</view>
-			<view class="item">国内</view>
-			<view class="item">国内</view>
-			<view class="item">国内</view>
-			<view class="item">国内</view>
+			<view class="item" :class="index===navIndex?'active':''" v-for="(item,index) in 10" @click="clickNav(index)">国内
+			</view>
 		</scroll-view>
 		<view class="content">
-			<view class="row">
+			<view class="row" v-for="item in 10">
 				<newsbox></newsbox>
 			</view>
 		</view>
@@ -20,14 +16,17 @@
 	export default {
 		data() {
 			return {
-				title: 'Hello'
+				navIndex: 0
 			}
 		},
 		onLoad() {
 
 		},
 		methods: {
-
+			//点击导航切换
+			clickNav(index) {
+				this.navIndex = index
+			}
 		}
 	}
 </script>
@@ -37,6 +36,10 @@
 		height: 100rpx;
 		white-space: nowrap;
 		background-color: #F7F8FA;
+		position: fixed;
+		top: var(--window-top);
+		left: 0;
+		z-index: 99;
 
 		/deep/ ::-webkit-scrollbar {
 			width: 4px !important;
@@ -53,11 +56,16 @@
 			line-height: 100rpx;
 			padding: 0 30rpx;
 			color: #333;
+
+			&.active {
+				color: #31C27C;
+			}
 		}
 	}
 
 	.content {
 		padding: 30rpx;
+		padding-top: 100rpx;
 
 		.row {
 			border-bottom: 1rpx dashed #efefef;
