@@ -6,13 +6,17 @@
 				{{item.classname}}
 			</view>
 		</scroll-view>
-		<view class="content" v-if="newsArr.length">
+		<view class="content">
 			<view class="row" v-for="item in newsArr" :key="item.id">
 				<newsbox :item="item" @click.native="goDetail"></newsbox>
 			</view>
 		</view>
-		<view class="nodata" v-else>
+		<view class="nodata" v-if="!newsArr.length">
 			<image src="../../static/images/nodata.png" mode="widthFix"></image>
+		</view>
+		<view class="loading" v-if="newsArr.length">
+			<view v-if="loading===1">数据加载中...</view>
+			<view v-if="loading===2">没有更多数据啦~</view>
 		</view>
 	</view>
 </template>
@@ -24,7 +28,8 @@
 				navIndex: 0,
 				navArr: [],
 				newsArr: [],
-				currentPage: 1
+				currentPage: 1,
+				loading: 0, //0默认 1加载中 2没有更多了
 			}
 		},
 		onLoad() {
@@ -32,7 +37,12 @@
 			this.getNewsData()
 		},
 		onReachBottom() {
+			//没有更多数据时不发送请求
+			if (this.loading === 2) {
+				return
+			}
 			this.currentPage++;
+			this.loading = 1;
 			this.getNewsData()
 		},
 		methods: {
@@ -42,6 +52,7 @@
 				//修复切换导航时页面问题
 				this.currentPage = 1
 				this.newsArr = []
+				this.loading = 0;
 				this.getNewsData(id)
 			},
 			//跳转到详情页
@@ -68,6 +79,10 @@
 						page: this.currentPage
 					},
 					success: res => {
+						if (res.data.length === 0) {
+							this.loading = 2
+							return
+						}
 						this.newsArr = [...this.newsArr, ...res.data]
 					}
 				})
@@ -128,6 +143,14 @@
 			image {
 				width: 360rpx;
 			}
+		}
+
+		.loading {
+			text-align: center;
+			font-size: 26rpx;
+			color: #888;
+			line-height: 2em;
+			padding-bottom: 1em;
 		}
 	}
 </style>
