@@ -12,12 +12,6 @@
 			<view class="row">
 				<newsbox></newsbox>
 			</view>
-			<view class="row">
-				<newsbox></newsbox>
-			</view>
-			<view class="row">
-				<newsbox></newsbox>
-			</view>
 		</view>
 	</view>
 </template>

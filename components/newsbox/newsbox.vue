@@ -1,13 +1,16 @@
 <template>
 	<view class="newsbox">
 		<view class="pic">
-			<image src="../../static/images/0.jpg" mode="aspectFill"></image>
+			<image :src="item.picUrl" mode="aspectFill"></image>
 		</view>
 		<view class="text">
-			<view class="title">新闻标题新闻标题新闻标题新闻标题新闻标题新闻标题新闻标题新闻标题</view>
-			<view class="info">
-				<text>作者</text>
-				<text>998浏览</text>
+			<view class="title">{{item.title}}</view>
+			<view class="info" v-if="!item.lookTime">
+				<text>{{item.author}}</text>
+				<text>{{item.hits}}浏览</text>
+			</view>
+			<view class="info" v-else>
+				<text>浏览时间：{{item.lookTime}}</text>
 			</view>
 		</view>
 	</view>
@@ -16,10 +19,21 @@
 <script>
 	export default {
 		name: "newsbox",
+		props: {
+			item: {
+				typeof: Object,
+				default () {
+					return {
+						title: '组件内默认的标题',
+						author: 'zhangsan',
+						hits: 668,
+						picUrl: '../../static/images/nopic.jpg'
+					}
+				}
+			}
+		},
 		data() {
-			return {
-
-			};
+			return {};
 		}
 	}
 </script>
@@ -46,7 +60,7 @@
 			justify-content: space-between;
 
 			.title {
-				font-size: 38rpx;
+				font-size: 36rpx;
 				color: #333;
 				text-overflow: -o-ellipsis-lastline;
 				overflow: hidden; //溢出内容隐藏
