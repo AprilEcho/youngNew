@@ -14,3 +14,5 @@ This is a uni-app project（青年帮新闻）.
 - 触底加载更多（onReachBottom属性）
 - loading效果处理
 - 详情页展示
+- 个人中心数据处理
+- 项目打包
